@@ -42,13 +42,8 @@ test_repo_debian_updates:
       {% endif %}
 
 # modify cobbler to be executed from remote-machines..
-
-{% set cobbler_version = salt['pkg.version']("cobbler") %}
-{% if salt['pkg.version_cmp'](cobbler_version, "3.3.0") >= 0 %}
-{% set cobbler_use_settings_yaml = true %}
-{% else %}
-{% set cobbler_use_settings_yaml = false %}
-{% endif %}
+{% set products_using_new_cobbler_version = ["uyuni", "head", "4.3-released", "4.3-nightly"] %}
+{% set cobbler_use_settings_yaml = grains.get('product_version') | default('', true) in products_using_new_cobbler_version %}
 
 cobbler_configuration:
     service:
