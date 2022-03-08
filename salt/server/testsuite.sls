@@ -63,12 +63,10 @@ cobbler_configuration:
     - name: /etc/cobbler/settings.yaml
     - pattern: "redhat_management_permissive: false"
     - repl: "redhat_management_permissive: true"
-      - file : /etc/cobbler/setting.yaml
 {% else %}
     - name: /etc/cobbler/settings
     - pattern: "redhat_management_permissive: 0"
     - repl: "redhat_management_permissive: 1"
-      - file : /etc/cobbler/setting
 {% endif %}
     - require:
       - sls: server
