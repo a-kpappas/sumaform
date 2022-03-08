@@ -42,8 +42,13 @@ test_repo_debian_updates:
       {% endif %}
 
 # modify cobbler to be executed from remote-machines..
+
 {% set cobbler_version = salt['pkg.version']("cobbler") %}
-{% set cobbler_use_settings_yaml = salt['pkg.version_cmp'](cobbler_version, "3.3.0") >= 0 %}
+{% if salt['pkg.version_cmp'](cobbler_version, "3.3.0") >= 0 %}
+{% set cobbler_use_settings_yaml = true %}
+{% else %}
+{% set cobbler_use_settings_yaml = false %}
+{% endif %}
 
 cobbler_configuration:
     service:
