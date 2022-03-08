@@ -54,7 +54,7 @@ cobbler_configuration:
 {% if cobbler_use_settings_yaml %}
       - file : /etc/cobbler/settings.yaml
 {% else %}
-      - file : /etc/cobbler/setting
+      - file : /etc/cobbler/settings
 {% endif %}
     - require:
       - sls: server
