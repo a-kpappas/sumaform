@@ -1,0 +1,52 @@
+terraform {
+ required_version = "1.0.10"
+ required_providers {
+   libvirt = {
+     source = "dmacvicar/libvirt"
+     version = "0.6.3"
+   }
+ }
+}
+
+provider "libvirt" {
+  uri = "qemu:///system"
+}
+
+module "base" {
+  source = "./modules/base"
+
+  cc_username = "UCB"
+  cc_password = "haha"
+  images = ["opensuse154o"]
+  ssh_key_path = "~/.ssh/id_ed25519.pub"
+  // optional parameters with defaults below
+  // use_avahi = true
+  // name_prefix = "" // if you use name_prefix, make sure to update the server_configuration for clients/minions below
+  // timezone = "Europe/Berlin"
+  // use_ntp = true
+
+//  provider_settings = {
+//    network_name = "default" // change to null if you add a bridge below
+//    additional_network = null
+//    bridge = null
+//    pool = "default"
+//  }
+}
+
+module "host" {
+  source = "./modules/host"
+  base_configuration = module.base.configuration
+  name = "test-openqa"
+  image = "opensuse154o"
+  provider_settings = {
+    memory = 8192
+    vcpu = 4
+    cpu_model = "host-passthrough"
+  }
+
+  //server_configuration = module.server.configuration
+  // see modules/client/variables.tf for possible values
+}
+
+
+
