@@ -52,5 +52,5 @@ base:
 
   'roles:openqa':
     - match: grain
-      openqa
+    -  openqa
 
