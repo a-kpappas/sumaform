@@ -49,3 +49,8 @@ base:
   'roles:registry':
     - match: grain
     - registry
+
+  'roles:openqa':
+    - match: grain
+      openqa
+
