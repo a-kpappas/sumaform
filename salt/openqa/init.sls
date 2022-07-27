@@ -12,7 +12,7 @@ no_kernel_default_base:
 
 virthost_packages:
   pkg.installed:
-        - patterns-openSUSE-{{ grains['hypervisor']|lower() }}_server
+        - patterns-openSUSE-kvm_server
         - libvirt-client
         - qemu-tools
         - guestfs-tools
@@ -28,7 +28,7 @@ virthost_packages:
 
 
 # WORKAROUND for bsc#1181264
-{% if grains['osrelease'] == '15.3' and grains['hypervisor'] == 'kvm' %}
+{% if grains['osrelease'] == '15.3' %}
 no-50-xen-hvm-x86_64.json:
   file.absent:
     - name: /usr/share/qemu/firmware/50-xen-hvm-x86_64.json
@@ -77,7 +77,6 @@ ifcfg-br0:
         BRIDGE_PORTS=eth0
 
 
-
 openqa-bootstrap:
   cmd.run:
     - name: /usr/share/openqa/script/openqa-bootstrap
@@ -85,40 +84,6 @@ openqa-bootstrap:
     #   - fun: service.status
     #     args:
     #       - ca-certificates.path
-{% if grains['hypervisor']|lower() == 'xen' %}
-{% if grains['xen_disk_image'] %}
-disk-image-template-xenpv.qcow2:
-  file.managed:
-    - name: /var/testsuite-data/disk-image-template-xenpv.qcow2
-    - source: {{ grains['hvm_disk_image'] }}
-    {% if grains['hvm_disk_image_hash'] %}
-    - source_hash: {{ grains['hvm_disk_image_hash'] }}
-    {% else %}
-    - skip_verify: True
-    {% endif %}
-    - mode: 655
-    - makedirs: True
-{% endif %}
-
-set_xen_default:
-  bootloader.grub_set_default:
-    - name: Xen
-    - onchanges:
-        - pkg: virthost_packages
-
-lower_dom0_memory:
-  file.replace:
-    - name: /etc/default/grub
-    - pattern: ^GRUB_CMDLINE_XEN="[^"]*"
-    - repl: GRUB_CMDLINE_XEN="dom0_mem=1024000"
-
-rebuild_grub_cfg:
-  cmd.run:
-    - name: grub2-mkconfig -o /boot/grub2/grub.cfg
-    - onchanges:
-        - bootloader: set_xen_default
-        - file: lower_dom0_memory
-{% endif %}
 
 reboot:
   module.run:
