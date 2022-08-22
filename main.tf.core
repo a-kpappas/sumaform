@@ -38,7 +38,12 @@ module "host" {
   base_configuration = module.base.configuration
   name = "test-openqa"
   image = "opensuse154o"
-  roles = ["openqa"]
+  provider_settings = {
+    memory = 8192
+    vcpu = 4
+    cpu_model = "host-passthrough"
+  }
+
   //server_configuration = module.server.configuration
   // see modules/client/variables.tf for possible values
 }

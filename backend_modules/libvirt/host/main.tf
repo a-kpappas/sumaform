@@ -19,7 +19,6 @@ locals {
     contains(var.roles, "controller") ? { memory = 2048 } : {},
     contains(var.roles, "grafana") ? { memory = 4096 } : {},
     contains(var.roles, "virthost") ? { memory = 3072, vcpu = 3 } : {},
-    contains(var.roles, "openqa") ? {cpu_model = "host-passthrough", memory = 8192, vcpu = 4 } : {},
     contains(var.roles, "jenkins") ? { memory = 16384, vcpu = 4 } : {},
     var.provider_settings,
     contains(var.roles, "virthost") ? { cpu_model = "host-passthrough", xslt = file("${path.module}/virthost.xsl") } : {},
