@@ -43,7 +43,10 @@ module "host" {
     vcpu = 4
     cpu_model = "host-passthrough"
   }
-
+  roles = ['openqa']
+  additional_grains = {
+    workers = 4
+  }
   //server_configuration = module.server.configuration
   // see modules/client/variables.tf for possible values
 }
