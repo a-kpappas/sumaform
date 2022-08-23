@@ -1,4 +1,4 @@
-{% for i in ranges(grains['workers']) %}
+{% for i in ranges(grains['ps.num_cpus']) %}
 openqa-worker@i:
   service.running:
     - enable: True
