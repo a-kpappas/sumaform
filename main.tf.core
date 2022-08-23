@@ -25,12 +25,12 @@ module "base" {
   // timezone = "Europe/Berlin"
   // use_ntp = true
 
-//  provider_settings = {
-//    network_name = "default" // change to null if you add a bridge below
-//    additional_network = null
-//    bridge = null
-//    pool = "default"
-//  }
+  provider_settings = {
+    network_name = null // "default" // change to null if you add a bridge below
+    //additional_network = null
+    bridge = "br0"
+    //pool = "default"
+  }
 }
 
 module "host" {
@@ -50,6 +50,3 @@ module "host" {
   //server_configuration = module.server.configuration
   // see modules/client/variables.tf for possible values
 }
-
-
-
