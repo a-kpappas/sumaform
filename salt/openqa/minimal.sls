@@ -1,14 +1,14 @@
 include:
   {% if grains['hostname'] and grains['domain'] %}
-  - default.hostname
+  - openqa.hostname
   {% endif %}
-  - default.network
-  - default.firewall
-  - default.avahi
+  - openqa.network
+  - openqa.firewall
+  - openqa.avahi
   {% if 'build_image' not in grains.get('product_version') | default('', true) %}
   - repos
   {% endif %}
-  - default.time
+  - openqa.time
 
 minimal_package_update:
   pkg.latest:

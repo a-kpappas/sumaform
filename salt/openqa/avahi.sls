@@ -1,5 +1,5 @@
 include:
-  - default.hostname
+  - openqa.hostname
 
 {% if grains['use_avahi'] and grains.get('osmajorrelease', None) != None %}
 

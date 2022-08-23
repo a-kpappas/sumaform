@@ -1,14 +1,13 @@
 include:
-  - default.locale
-  - default.minimal
-  - default.pkgs
-  - default.grub
+  - openqa.locale
+  - openqa.minimal
+  - openqa.pkgs
+  - openqa.grub
   {% if grains.get('reset_ids') | default(false, true) %}
-  - default.ids
+  - openqa.ids
   {% endif %}
-  - default.testsuite
-  - default.openqa
-
+  - openqa.testsuite
+  
 {% if grains.get('use_os_unreleased_updates') | default(False, true) or grains.get('use_os_released_updates') | default(False, true) %}
 update_packages:
   pkg.uptodate:
