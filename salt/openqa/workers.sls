@@ -4,4 +4,5 @@ openqa-worker@i:
     - enable: True
     require:
       - sls: bootstrap
+      - sls: openqa_pkgs
 {% endfor %}
