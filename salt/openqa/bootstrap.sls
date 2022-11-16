@@ -1,5 +1,3 @@
-execute_bootstrap:
-  cmd.run:
-    - name: /usr/share/openqa/script/openqa-bootstrap
-    require:
-      - sls: openqa_pkgs
+include:
+  - openqa.openqa_pkgs
+

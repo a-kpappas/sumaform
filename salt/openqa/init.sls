@@ -1,4 +1,8 @@
+# include:
 include:
+  - default
   - openqa.openqa_pkgs
-  - openqa.bootstrap
-  - openqa.workers.sls
+
+test_openqa:
+  cmd.run:
+    - name: echo testing > out.txt
