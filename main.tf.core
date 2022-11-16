@@ -20,7 +20,7 @@ module "base" {
   images = ["opensuse154o"]
   ssh_key_path = "~/.ssh/id_ed25519.pub"
   // optional parameters with defaults below
-  // use_avahi = true
+   use_avahi = false
   // name_prefix = "" // if you use name_prefix, make sure to update the server_configuration for clients/minions below
   // timezone = "Europe/Berlin"
   // use_ntp = true
@@ -42,6 +42,7 @@ module "host" {
     memory = 8192
     vcpu = 4
     cpu_model = "host-passthrough"
+    mac = "52:54:00:72:26:b8"
   }
   roles = ["openqa"]
   //server_configuration = module.server.configuration
