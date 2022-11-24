@@ -1,6 +1,6 @@
 include:
   - default
-  
+
 # install_openqa_bootstrap:
 #   pkg.latest:
 #     - pkgs:
@@ -8,6 +8,12 @@ include:
 #     - require:
 #       - sls: repos
 
+install_git:
+  pkg.latest:
+    - pkgs:
+      - git
+    - require:
+      - sls: repos
 # install_openqa_workers:
 #   pkg.latest:
 #     - pkgs:
