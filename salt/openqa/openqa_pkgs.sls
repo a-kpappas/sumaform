@@ -14,12 +14,6 @@ install_git:
       - git
     - require:
       - sls: repos
-# install_openqa_workers:
-#   pkg.latest:
-#     - pkgs:
-#       - openQA-worker
-#     - require:
-#       - sls: repos
 
 get_script:
   git.latest:
@@ -32,9 +26,9 @@ execute_bootstrap:
   cmd.run:
     - name: /root/openQA/script/openqa-bootstrap
 
-# {% set cpus = 4 %}
-# {% for i in range(cpus) %}
-# openqa-worker@{{i}}:
-#   service.running:
-#     - enable: True
-# {% endfor %}
+{% set cpus = 4 %}
+{% for i in range(cpus) %}
+openqa-worker@{{i}}:
+  service.running:
+    - enable: True
+{% endfor %}
