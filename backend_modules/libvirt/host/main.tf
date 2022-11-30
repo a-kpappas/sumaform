@@ -152,12 +152,18 @@ resource "libvirt_domain" "domain" {
     source_service = null
   }
 
+ video {
+      type = "virtio"
+  }
+
   graphics {
     type        = "spice"
     listen_type = "address"
-    listen_address = "0.0.0.0"
+    listen_address = "127.0.0.1"
     autoport    = true
   }
+
+
 
   xml {
     xslt = local.provider_settings["xslt"]
