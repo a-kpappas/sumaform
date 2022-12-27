@@ -32,3 +32,10 @@ openqa-worker@{{i}}:
   service.running:
     - enable: True
 {% endfor %}
+
+fix_developer_console:
+  file.replace:
+    - name: '/etc/openqa/workers.ini'
+    - pattern: '^#(WORKER_HOSTNAME = )(.*)'
+    - repl: '\1 localhost'
+    - show_changes: True
