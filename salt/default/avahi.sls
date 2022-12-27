@@ -1,7 +1,7 @@
-include:
-  - default.hostname
 
 {% if grains['use_avahi'] and grains.get('osmajorrelease', None) != None %}
+include:
+  - default.hostname
 
 # TODO: remove the following state when fix to bsc#1163683 is applied to all the SLES <= SLES15SP3
 {% if grains['osfullname'] == 'SLES' and grains['osrelease'] != '15.4' %}
